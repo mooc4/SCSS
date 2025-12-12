@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.strictteach.mapper.EmployeeMapper">
+    <insert id="insert">
+        insert into employee(id,name,sex,age,password,account)
+        values(#{id},#{name},#{sex},#{age},#{password},#{account})
+    </insert>
+    <update id="update">
+        update employee set name=#{name},sex=#{sex},age=#{age},password=#{password},account=#{account}
+        where id=#{id}
+    </update>
+    <delete id="delete">
+        delete from employee where id=#{id}
+    </delete>
+    <select id="selectAll" resultType="com.web.strictteach.pojo.Employee">
+        select * from employee
+        <where>
+            <if test="name != null">name  like concat('%',#{name},'%')</if>
+        </where>
+        order by id desc
+    </select>
+
+
+</mapper>
